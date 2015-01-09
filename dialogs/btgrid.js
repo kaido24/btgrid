@@ -24,7 +24,7 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
 						label: 'Select number of columns',
 						validate: CKEDITOR.dialog.validate.notEmpty( "Please select number of columns." ),
 						items: [
-			  [ '2', 2],
+			        [ '2', 2],
               [ '3', 3],
               [ '4', 4],
               [ '6', 6],
@@ -60,6 +60,5 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
 			}
 		],
 	};
-
   return dialog;
-} );
+});
