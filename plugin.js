@@ -30,7 +30,7 @@ CKEDITOR.plugins.add('btgrid', {
         for (var c= 1;c <= rowCount;c++) {
           for (var i= 1;i <= maxGridElements;i++) {
 
-            this.initEditable( 'content', {
+            this.initEditable( 'content' + c + i, {
               selector: '.row-'+ c + '> div:nth-child('+ i +') div.content'
             } );
           }
@@ -58,7 +58,7 @@ CKEDITOR.plugins.add('btgrid', {
           content =content + '</div>';
           row.appendHtml(content);
           for (var i = 1; i <= colCount; i++) {
-            this.initEditable( 'content', {
+            this.initEditable( 'content'+ rowNumber + i, {
               selector: '.row-'+ rowNumber +' > div:nth-child('+ i +') div.content'
             } );
           }
