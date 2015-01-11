@@ -3,7 +3,7 @@ CKEDITOR.plugins.add('btgrid', {
   requires: 'widget,dialog',
   icons: 'btgrid',
   init: function(editor) {
-    var maxGridElements = 12;
+    var maxGridColumns = 12;
     CKEDITOR.dialog.add('btgrid', this.path + 'dialogs/btgrid.js');
     editor.addContentsCss( this.path + 'styles/editor.css');
     editor.widgets.add('btgrid', {
@@ -27,13 +27,8 @@ CKEDITOR.plugins.add('btgrid', {
       },
       init: function() {
         var rowCount = this.element.getChildCount();
-        for (var c= 1;c <= rowCount;c++) {
-          for (var i= 1;i <= maxGridElements;i++) {
-
-            this.initEditable( 'content' + c + i, {
-              selector: '.row-'+ c + '> div:nth-child('+ i +') div.content'
-            } );
-          }
+        for (var rowNumber= 1;rowNumber <= rowCount;rowNumber++) {
+          this.createEditable(maxGridColumns, rowNumber);
         }
       },
       data: function() {
@@ -49,7 +44,7 @@ CKEDITOR.plugins.add('btgrid', {
       createGrid: function(colCount, row, rowNumber) {
         var content = '<div class="row row-' + rowNumber + '">';
         for (var i = 1; i <= colCount; i++) {
-          content = content + '<div class="col-md-' + 12/colCount + '">' +
+          content = content + '<div class="col-md-' + maxGridColumns/colCount + '">' +
                               '  <div class="content">' +
                               '    <p>Col ' + i + ' content area</p>' +
                               '  </div>' +
@@ -57,6 +52,9 @@ CKEDITOR.plugins.add('btgrid', {
         }
         content =content + '</div>';
         row.appendHtml(content);
+        this.createEditable(colCount, rowNumber);
+      },
+      createEditable: function(colCount,rowNumber) {
         for (var i = 1; i <= colCount; i++) {
           this.initEditable( 'content'+ rowNumber + i, {
             selector: '.row-'+ rowNumber +' > div:nth-child('+ i +') div.content'
