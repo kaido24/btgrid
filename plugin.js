@@ -49,19 +49,19 @@ CKEDITOR.plugins.add('btgrid', {
       createGrid: function(colCount, row, rowNumber) {
         var content = '<div class="row row-' + rowNumber + '">';
         for (var i = 1; i <= colCount; i++) {
-           content = content + '<div class="col-md-' + 12/colCount + '">' +
-            '    <div class="content">' +
-            '      <p>Col ' + i + ' content area</p>' +
-            '    </div>' +
-            '  </div>';
-          }
-          content =content + '</div>';
-          row.appendHtml(content);
-          for (var i = 1; i <= colCount; i++) {
-            this.initEditable( 'content'+ rowNumber + i, {
-              selector: '.row-'+ rowNumber +' > div:nth-child('+ i +') div.content'
-            } );
-          }
+          content = content + '<div class="col-md-' + 12/colCount + '">' +
+                              '  <div class="content">' +
+                              '    <p>Col ' + i + ' content area</p>' +
+                              '  </div>' +
+                              '</div>';
+        }
+        content =content + '</div>';
+        row.appendHtml(content);
+        for (var i = 1; i <= colCount; i++) {
+          this.initEditable( 'content'+ rowNumber + i, {
+            selector: '.row-'+ rowNumber +' > div:nth-child('+ i +') div.content'
+          } );
+        }
       }
     });
   }
