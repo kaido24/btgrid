@@ -1,9 +1,11 @@
 "use strict"
 
 CKEDITOR.plugins.setLang( 'btgrid', 'en', {
-	image: 'Image',
-  imageTitle: 'Image',
+	selNumCols: 'Select number of columns',
+  genNrRows: 'Add number of rows to generate',
 	infoTab: 'Info',
-  interval: 'Interval',
-	alt: 'Alternative Text',
+	createBtGrid: 'Create a Bootstrap grid',
+	editBtGrid: 'Edit Bootstrap grid',
+	numColsError:  'Please select number of columns.',
+	numRowsError: 'Please insert numeric value for Number of rows.',
 } );

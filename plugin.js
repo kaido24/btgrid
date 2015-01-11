@@ -7,10 +7,8 @@ CKEDITOR.plugins.add('btgrid', {
     CKEDITOR.dialog.add('btgrid', this.path + 'dialogs/btgrid.js');
     editor.addContentsCss( this.path + 'styles/editor.css');
     editor.widgets.add('btgrid', {
-      allowedContent:
-              'div(!btgrid);' +
-              'div(!btgrid-content);',
-      requiredContent: 'div(btgrid),div(row),div(content)',
+      allowedContent: 'div(!btgrid);div(!row);div(!content)',
+      requiredContent: 'div(btgrid)',
       parts: {
         btgrid: 'div.btgrid',
       },
@@ -20,7 +18,7 @@ CKEDITOR.plugins.add('btgrid', {
       template:
               '<div class="btgrid">' +
               '</div>',
-      button: 'Create a Bootstrap grid',
+      button: lang.createBtGrid,
       dialog: 'btgrid',
       upcast: function(element) {
         return element.name == 'div' && element.hasClass('btgrid');

@@ -3,7 +3,7 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
   commonLang = editor.lang.common;
 
   var dialog = {
-    title: 'Edit Bootstrap grid',
+    title: lang.editBtGrid,
     minWidth: 600,
     minHeight: 300,
     contents: [{
@@ -13,9 +13,10 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
       elements: [{
         id: 'colCount',
         type: 'select',
-        label: 'Select number of columns',
-        validate: CKEDITOR.dialog.validate.notEmpty( "Please select number of columns." ),
+        label: lang.selNumCols,
+        validate: CKEDITOR.dialog.validate.notEmpty( lang.numColsError ),
         items: [
+          [ commonLang.notSet, '' ],
           [ '2', 2],
           [ '3', 3],
           [ '4', 4],
@@ -33,9 +34,9 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
         {
           id: 'rowCount',
           type: 'text',
-          validate: CKEDITOR.dialog.validate.notEmpty( "Please insert numeric value for Number of rows." ),
+          validate: CKEDITOR.dialog.validate.notEmpty( lang.numRowsError ),
           width: '50px',
-          label: 'Number of rows to generate',
+          label: lang.genNrRows,
           setup: function( widget ) {
             this.setValue( widget.data.rowCount );
           },
