@@ -1,5 +1,5 @@
 CKEDITOR.dialog.add( 'btgrid', function( editor ) {
-  var lang = editor.lang.btgrid,
+  var lang = editor.lang.btgrid;
   commonLang = editor.lang.common;
 
   var dialog = {
