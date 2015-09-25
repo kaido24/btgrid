@@ -8,7 +8,7 @@ CKEDITOR.plugins.add('btgrid', {
     CKEDITOR.dialog.add('btgrid', this.path + 'dialogs/btgrid.js');
     editor.addContentsCss( this.path + 'styles/editor.css');
     editor.widgets.add('btgrid', {
-      allowedContent: 'div(!btgrid);div(!row);div(!content)',
+      allowedContent: 'div(!btgrid);div(!row,!row-*);div(!col-*-*);div(!content)',
       requiredContent: 'div(btgrid)',
       parts: {
         btgrid: 'div.btgrid',
