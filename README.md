@@ -8,4 +8,4 @@ Demo video https://www.youtube.com/watch?v=Up7egPLxfdI
 
 Bootstrap 3 Quicktable https://github.com/kaido24/btquicktable
 
-Bootstrap 3 grid https://github.com/kaido24/btgrid
+Bootstrap 3 grid https://github.com/kaido24/bt_table
