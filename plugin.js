@@ -33,8 +33,8 @@
            button: lang.createBtGrid,
            dialog: 'btgrid',
            defaults: {
-              colCount: '2',
-              rowCount: '1'
+              // colCount: '2',
+              // rowCount: '1'
           },
            upcast: function(element) {
              return element.name == 'div' && element.hasClass('btgrid');

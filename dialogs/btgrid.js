@@ -39,7 +39,6 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
             id: 'rowCount',
             type: 'text',
             width: '50px',
-            'default': '',
             label: lang.genNrRows,
             validate: function() {
               if (this.getValue() < 1) {
