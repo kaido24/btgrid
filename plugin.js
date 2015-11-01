@@ -8,9 +8,9 @@
        var lang = editor.lang.btgrid;
 
        editor.ui.addButton( 'btgrid', {
-          label: 'Insert Timestamp',
-          command: 'btgrid',
-          toolbar: 'insert'
+        //  label: 'Insert Toolbar',
+      //    command: 'btgrid',
+        //  toolbar: 'insert'
       });
 
        CKEDITOR.dialog.add('btgrid',  this.path + 'dialogs/btgrid.js');
