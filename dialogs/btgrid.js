@@ -1,6 +1,20 @@
 CKEDITOR.dialog.add( 'btgrid', function( editor ) {
   var lang = editor.lang.btgrid;
   var commonLang = editor.lang.common;
+
+  // Whole-positive-integer validator.
+  function validatorNum(msg) {
+    return function() {
+      var value = this.getValue(),
+        pass = !!(CKEDITOR.dialog.validate.integer()(value) && value > 0);
+
+      if (!pass) {
+        alert(msg); // jshint ignore:line
+      }
+
+      return pass;
+    };
+  }
   return {
     title: lang.editBtGrid,
     minWidth: 600,
@@ -14,19 +28,16 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
           {
             id: 'colCount',
             type: 'select',
+            required: true,
             label: lang.selNumCols,
             items: [
-              [ '2', '2'],
-              [ '3', '3'],
-              [ '4', '4'],
-              [ '6', '6'],
-              [ '12', '12'],
+              [ '2', 2],
+              [ '3', 3],
+              [ '4', 4],
+              [ '6', 6],
+              [ '12', 12],
             ],
-            validate: function() {
-              if (this.getValue() < 1 ) {
-                  return false;
-              }
-            },
+            validate: validatorNum(lang.numColsError),
             setup: function( widget ) {
               this.setValue( widget.data.colCount );
             },
@@ -39,12 +50,9 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
             id: 'rowCount',
             type: 'text',
             width: '50px',
+            required: true,
             label: lang.genNrRows,
-            validate: function() {
-              if (this.getValue() < 1) {
-                  return false;
-              }
-            },
+            validate: validatorNum(lang.numRowsError),
             setup: function( widget ) {
               this.setValue( widget.data.rowCount );
             },

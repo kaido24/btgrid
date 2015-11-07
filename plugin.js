@@ -7,12 +7,6 @@
        var maxGridColumns = 12;
        var lang = editor.lang.btgrid;
 
-       editor.ui.addButton( 'btgrid', {
-        //  label: 'Insert Toolbar',
-      //    command: 'btgrid',
-        //  toolbar: 'insert'
-      });
-
        CKEDITOR.dialog.add('btgrid',  this.path + 'dialogs/btgrid.js');
 
        editor.addContentsCss( this.path + 'styles/editor.css');
@@ -25,6 +19,7 @@
              btgrid: 'div.btgrid',
            },
            editables: {
+             selector: '.content',
              content: '',
            },
            template:
@@ -33,28 +28,28 @@
            button: lang.createBtGrid,
            dialog: 'btgrid',
            defaults: {
-              // colCount: '2',
-              // rowCount: '1'
+            //  colCount: 2,
+            // rowCount: 1
           },
+          // Before init.
            upcast: function(element) {
              return element.name == 'div' && element.hasClass('btgrid');
            },
-           init: function() {
-             var rowCount = this.element.getChildCount();
-             for (var rowNumber= 1;rowNumber <= rowCount;rowNumber++) {
-               this.createEditable(maxGridColumns, rowNumber);
-             }
-           },
+           // Prepare data
            data: function() {
-             if (this.data.colCount) {
+             console.log('data');
+             if (this.data.colCount && this.element.getChildCount() < 1) {
                var colCount = this.data.colCount;
                var rowCount = this.data.rowCount;
+               console.log();
                var row = this.parts['btgrid'];
                for (var i= 1;i <= rowCount;i++) {
                  this.createGrid(colCount, row, i);
                }
              }
            },
+           //Helper functions.
+           // Create grid
            createGrid: function(colCount, row, rowNumber) {
              var content = '<div class="row row-' + rowNumber + '">';
              for (var i = 1; i <= colCount; i++) {
@@ -68,6 +63,7 @@
              row.appendHtml(content);
              this.createEditable(colCount, rowNumber);
            },
+           // Create editable.
            createEditable: function(colCount,rowNumber) {
              for (var i = 1; i <= colCount; i++) {
                this.initEditable( 'content'+ rowNumber + i, {
@@ -77,6 +73,7 @@
             }
           }
         );
+
       }
     }
   );
