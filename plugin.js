@@ -19,7 +19,6 @@
              btgrid: 'div.btgrid',
            },
            editables: {
-             selector: '.content',
              content: '',
            },
            template:
@@ -35,13 +34,20 @@
            upcast: function(element) {
              return element.name == 'div' && element.hasClass('btgrid');
            },
+           // initialize
+           // Init function is useful after copy paste rebuild.
+           init: function() {
+             var rowNumber= 1;
+             var rowCount = this.element.getChildCount();
+             for (rowNumber; rowNumber <= rowCount;rowNumber++) {
+               this.createEditable(maxGridColumns, rowNumber);
+             }
+           },
            // Prepare data
            data: function() {
-             console.log('data');
              if (this.data.colCount && this.element.getChildCount() < 1) {
                var colCount = this.data.colCount;
                var rowCount = this.data.rowCount;
-               console.log();
                var row = this.parts['btgrid'];
                for (var i= 1;i <= rowCount;i++) {
                  this.createGrid(colCount, row, i);
@@ -73,7 +79,6 @@
             }
           }
         );
-
       }
     }
   );

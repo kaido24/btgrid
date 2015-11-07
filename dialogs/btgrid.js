@@ -19,6 +19,24 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
     title: lang.editBtGrid,
     minWidth: 600,
     minHeight: 300,
+    onShow: function() {
+      // Detect if there's a selected table.
+      var selection = editor.getSelection(),
+        ranges = selection.getRanges();
+      var command = this.getName();
+
+      var rowsInput = this.getContentElement('info', 'rowCount'),
+        colsInput = this.getContentElement('info', 'colCount');
+      if (command == 'btgrid') {
+        var grid = selection.getSelectedElement();
+        // Enable or disable row and cols.
+        if (grid) {
+          this.setupContent(grid);
+          rowsInput && rowsInput.disable();
+          colsInput && colsInput.disable();
+        }
+      }
+    },
     contents: [
       {
         id: 'info',
@@ -39,11 +57,11 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
             ],
             validate: validatorNum(lang.numColsError),
             setup: function( widget ) {
-              this.setValue( widget.data.colCount );
+              this.setValue(widget.data.colCount);
             },
             // When committing (saving) this field, set its value to the widget data.
             commit: function( widget ) {
-              widget.setData( 'colCount', this.getValue() );
+              widget.setData( 'colCount', this.getValue());
             }
           },
           {
@@ -57,7 +75,7 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
               this.setValue( widget.data.rowCount );
             },
             commit: function( widget ) {
-              widget.setData( 'rowCount', this.getValue() );
+              widget.setData( 'rowCount', this.getValue());
             }
           }
         ]
