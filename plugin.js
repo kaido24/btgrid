@@ -11,6 +11,11 @@
 
        editor.addContentsCss( this.path + 'styles/editor.css');
        // Add widget
+       editor.ui.addButton('btgrid', {
+         label: lang.createBtGrid,
+         command: 'btgrid',
+         icon: this.path + 'icons/btgrid.png'
+       });
        editor.widgets.add('btgrid',
          {
            allowedContent: 'div(!btgrid);div(!row,!row-*);div(!col-*-*);div(!content)',
@@ -24,7 +29,7 @@
            template:
                    '<div class="btgrid">' +
                    '</div>',
-           button: lang.createBtGrid,
+           //button: lang.createBtGrid,
            dialog: 'btgrid',
            defaults: {
             //  colCount: 2,
