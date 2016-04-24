@@ -1,6 +1,6 @@
 (function(){
   CKEDITOR.plugins.add('btgrid', {
-      lang: 'en,ru,fr',
+      lang: 'en,ru,fr,nl',
       requires: 'widget,dialog',
       icons: 'btgrid',
       init: function(editor) {
