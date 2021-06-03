@@ -1,3 +1,4 @@
+
 (function(){
   CKEDITOR.plugins.add('btgrid', {
       lang: 'en,ru,fr,nl,de',
@@ -51,28 +52,48 @@
            // Prepare data
            data: function() {
              if (this.data.colCount && this.element.getChildCount() < 1) {
-               var colCount = this.data.colCount;
+               var widthAuto = maxGridColumns/this.data.colCount
+               var manual = parseInt(this.data.colCount) === 1
+               var data = this.data
+               var total = 0
+               var cols = manual ? (
+                 [1,2,3,4,5,6,7,8,9,10,11,12].reduce(function(a,i){
+                   var val = parseInt(data['colWidth'+i]) || 0
+                   if(val) a.push(val)
+                   total = total + val
+                   return a
+                 }, []).filter(function(n){return !!n})
+               ) : (
+                 (function(cnt){
+                   var a = [];
+                   for (var i=1; i<=cnt; i++) a.push(widthAuto);
+                   return a;
+                 })(this.data.colCount)
+               )
+               if(total>12) { alert(lang.manualTotalError); return; }
                var rowCount = this.data.rowCount;
                var row = this.parts['btgrid'];
                for (var i= 1;i <= rowCount;i++) {
-                 this.createGrid(colCount, row, i);
+                 this.createGrid(cols, row, i);
                }
              }
            },
            //Helper functions.
            // Create grid
-           createGrid: function(colCount, row, rowNumber) {
+           createGrid: function(cols, row, rowNumber) {
              var content = '<div class="row row-' + rowNumber + '">';
-             for (var i = 1; i <= colCount; i++) {
-               content = content + '<div class="col col-md-' + maxGridColumns/colCount + '">' +
-                                   '  <div class="content">' +
-                                   '    <p>Col ' + i + ' content area</p>' +
-                                   '  </div>' +
-                                   '</div>';
-             }
-             content =content + '</div>';
+              cols.forEach(function(width, i) {
+                content = content + (
+                  '<div class="col col-md-' + width + '">' +
+                  '  <div class="content">' +
+                  '    <p>Col ' + i + ' content area</p>' +
+                  '  </div>' +
+                  '</div>'
+                );
+              })
+             content = content + '</div>';
              row.appendHtml(content);
-             this.createEditable(colCount, rowNumber);
+             this.createEditable(cols.length, rowNumber);
            },
            // Create editable.
            createEditable: function(colCount,rowNumber) {

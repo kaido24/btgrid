@@ -14,7 +14,40 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
 
       return pass;
     };
-  }
+  };
+
+  function validatorWidth(msg) {
+    return function() {
+      var value = this.getValue(),
+        pass = !!(CKEDITOR.dialog.validate.integer()(value) && value >= 0 && value < 12);
+
+      if (!pass) {
+        alert(msg); // jshint ignore:line
+      }
+
+      return pass;
+    };
+  };
+
+  function createWidthField(id) {
+    return (
+      {
+        id: 'colWidth' + id,
+        type: 'text',
+        width: '50px',
+        required: true,
+        label: lang.manualWidth + ' ' + id,
+        validate: validatorWidth(lang.manualWidthError + ' ' + id),
+        setup: function( widget ) {
+          this.setValue( widget.data.colWidth + id );
+        },
+        commit: function( widget ) {
+          widget.setData( 'colWidth' + id, this.getValue());
+        }
+      }
+    )
+  };
+
   return {
     title: lang.editBtGrid,
     minWidth: 600,
@@ -54,6 +87,7 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
               [ '4', 4],
               [ '6', 6],
               [ '12', 12],
+              [ lang.manualCols, 1 ]
             ],
             validate: validatorNum(lang.numColsError),
             setup: function( widget ) {
@@ -78,7 +112,7 @@ CKEDITOR.dialog.add( 'btgrid', function( editor ) {
               widget.setData( 'rowCount', this.getValue());
             }
           }
-        ]
+        ].concat([1,2,3,4,5,6,7,8,9,10,11,10].map(createWidthField))
       }
     ],
   };
